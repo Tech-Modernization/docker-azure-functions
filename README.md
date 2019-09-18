@@ -7,9 +7,9 @@ Run as a command using `node` as entrypoint:
 
     docker run --rm --entrypoint node contino/azure-functions/node --version
 
-Run as a shell and mount `.aws` folder and current directory as volumes:
+Run as a shell and mount `.azure` folder and current directory as volumes:
 
-    docker run --rm -it -v ~/.aws:/root/.aws -v $(pwd):/opt/app contino/aws-cli bash
+    docker run --rm -it -v ~/.azure:/root/.azure -v $(pwd):/opt/app contino/azure-functions/node bash
 
 Using docker-compose:
 ```
