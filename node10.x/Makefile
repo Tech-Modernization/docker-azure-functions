@@ -1,7 +1,7 @@
 AZURE_FUNCTIONS_VERSION=2
 NODE_VERSION=10
 TAG = "$(AZURE_FUNCTIONS_VERSION).$(NODE_VERSION)"
-IMAGE_NAME ?= contino/azure-functions/node:$(TAG)
+IMAGE_NAME ?= ebrucucen/azure-functions-node:$(TAG)
 
 build:
 	docker build -t $(IMAGE_NAME) -f node_$(NODE_VERSION)x.dockerfile .
