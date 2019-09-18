@@ -17,3 +17,6 @@ gitTag:
 	-git push origin :refs/tags/$(TAG)
 	git tag $(TAG)
 	git push origin $(TAG)
+
+deploy:
+     @docker push $(TAG)

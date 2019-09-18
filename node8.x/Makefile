@@ -16,9 +16,7 @@ gitTag:
 	-git tag -d $(TAG)
 	-git push origin :refs/tags/$(TAG)
 	git tag $(TAG)
-	git add .
-	git commit -m "Modifying version $(TAG)"
 	git push origin $(TAG)
 
 deploy:
-    @docker run --rm -it $(IMAGE_NAME) node --version
+    @docker push $(TAG)
