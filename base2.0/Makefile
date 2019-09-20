@@ -1,13 +1,14 @@
 AZURE_FUNCTIONS_VERSION=2
-PYTHON_VERSION=3.6
-TAG = "$(AZURE_FUNCTIONS_VERSION).$(NODE_VERSION)"
-IMAGE_NAME ?= ebrucucen/azure-functions-python:$(TAG)
+APP_NAME=base
+PYTHON_VERSION=2.0
+TAG=$(AZURE_FUNCTIONS_VERSION).$(PYTHON_VERSION)
+IMAGE_NAME ?= ebrucucen/azure-functions-base:$(TAG)
 
 build:
-	docker build -t $(IMAGE_NAME) -f node_$(PYTHON_VERSION)x.dockerfile .
+	docker build -t $(IMAGE_NAME) -f base_$(PYTHON_VERSION).dockerfile .
 
 test:
-	@docker run --rm -it $(IMAGE_NAME) node --version
+	@docker run --rm -it $(IMAGE_NAME) base --version
 
 shell:
 	docker run --rm -it -v ~/.azure:/root/.azure -v $(shell pwd):/opt/app $(IMAGE_NAME) bash

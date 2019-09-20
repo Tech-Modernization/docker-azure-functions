@@ -1,7 +1,7 @@
-ARG BASE_IMAGE=mcr.microsoft.com/azure-functions/base:2.0-alpine
+ARG BASE_IMAGE=ebrucucen/azure-functions-base:2.2.0
 FROM ${BASE_IMAGE} as runtime-image
 
-FROM python:3.6-alpine
+FROM python:3.7-alpine
 
 # Install Python dependencies
 ENV PYENV_ROOT=/root/.pyenv \
@@ -29,10 +29,11 @@ RUN apk add --no-cache libc6-compat libnsl && \
     # .NET Core dependencies
     krb5-libs libgcc libintl libssl1.1 libstdc++ tzdata userspace-rcu zlib lttng-ust && \
     mkdir -p /azure-functions-host/workers && \
-    mv /python /azure-functions-host/workers
+    mv /python /azure-functions-host/workers && \
+    mkdir -p /FuncExtensionBundles 
 
 COPY --from=runtime-image ["/azure-functions-host", "/azure-functions-host"]
-COPY --from=runtime-image [ "/FuncExtensionBundles", "/FuncExtensionBundles" ]
+COPY --from=runtime-image ["/FuncExtensionBundles", "/FuncExtensionBundles" ]
 
 # Add custom worker config
 COPY ./python-context/start.sh ./python-context/worker.config.json /azure-functions-host/workers/python/
