@@ -16,6 +16,7 @@ ENV PYENV_ROOT=/root/.pyenv \
 
 # Install Python
 RUN apk add --no-cache libc6-compat libnsl && \
+    apk add --update make && \
     # workaround for https://github.com/grpc/grpc/issues/17255
     ln -s /usr/lib/libnsl.so.2 /usr/lib/libnsl.so.1 && \
     export WORKER_TAG=1.0.0a6 && \
