@@ -5,11 +5,11 @@
 ## Usage
 Run as a command using `node` as entrypoint:
 
-    docker run --rm --entrypoint node contino/azure-functions/node --version
+    docker run --rm --entrypoint node contino/azure-functions-node --version
 
 Run as a shell and mount `.azure` folder and current directory as volumes:
 
-    docker run --rm -it -v ~/.azure:/root/.azure -v $(pwd):/opt/app contino/azure-functions/node bash
+    docker run --rm -it -v ~/.azure:/root/.azure -v $(pwd):/opt/app contino/azure-functions-node bash
 
 Using docker-compose:
 ```
@@ -23,16 +23,25 @@ services:
       - .:/opt/app
 
     azure-nodejs8:
-        image: contino/azure-functions/node:0.2.8
+        image: contino/azure-functions-node:0.2.8
         working_dir: /var/task/azure-nodejs8
         volumes:
         - .:/var/task
     azure-nodejs10:
-        image: ebrucucen/azure-functions/node:0.2.10
+        image: ebrucucen/azure-functions-node:0.2.10
         working_dir: /var/task/azure-nodejs10
         volumes:
         - .:/var/task
-```
+    azure-python3.6:
+        image: contino/azure-functions-python:3.6
+        working_dir: /var/task/azure-nodejs8
+        volumes:
+        - .:/var/task
+    azure-python3.7:
+        image: ebrucucen/azure-functions-python:3.7
+        working_dir: /var/task/azure-nodejs10
+        volumes:
+        - .:/var/task```
 
 And it could be used in a Makefile: 
 ```

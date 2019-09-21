@@ -2,11 +2,12 @@ AZURE_FUNCTIONS_VERSION=2
 APP_NAME=python
 PYTHON_VERSION=3.7
 TAG=$(AZURE_FUNCTIONS_VERSION).$(PYTHON_VERSION)
-GIT_TAG=$(APP_NAME)$(TAG)
-IMAGE_NAME ?= ebrucucen/azure-functions-python:$(TAG)
+OWNER=ebrucucen
+GIT_TAG=$(OWNER)_$(APP_NAME)_$(TAG)
+IMAGE_NAME ?= $(OWNER)/azure-functions-$(APP_NAME):$(TAG)
 
 build:
-	docker build -t $(IMAGE_NAME) -f python_$(PYTHON_VERSION).dockerfile .
+	docker build -t $(IMAGE_NAME) -f $(APP_NAME)$(PYTHON_VERSION).dockerfile .
 
 test:
 	@docker run --rm -it $(IMAGE_NAME) python --version
